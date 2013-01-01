@@ -53,6 +53,10 @@ PRODUCT_PACKAGES += Torch
 PRODUCT_COPY_FILES += \
     device/samsung/d2-common/vold.fstab:system/etc/vold.fstab
 
+# Wifi
+PRODUCT_PACKAGES += \
+    libnetcmdiface
+
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
@@ -94,7 +98,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.data_netmgrd_nint=16 \
     lpa.decode=true \
     rild.libpath=/system/lib/libril-qc-qmi-1.so \
-    ril.subscription.types=NV,RUIM
+    ril.subscription.types=NV,RUIM \
+    ro.config.svlte1x=true \
+    ro.cdma.subscribe_on_ruim_ready=true \
+    persist.radio.no_wait_for_card=1 \
+    keyguard.no_require_sim=true
+
+# Workaround for MDP underrun issue with 4-layer composition
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.mdpcomp.maxlayer=3
 
 # common msm8960
 $(call inherit-product, device/samsung/msm8960-common/msm8960.mk)
