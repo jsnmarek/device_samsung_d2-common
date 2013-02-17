@@ -69,6 +69,10 @@ on post-fs-data
     # permission for TZIC
     chown system system /dev/tzic
 
+# permissions for scheduler
+    chown root system /sys/block/mmcblk0/queue/scheduler
+    chmod 0664 /sys/block/mmcblk0/queue/scheduler
+
     # sensor
     chown system radio /sys/class/sensors/barometer_sensor/sea_level_pressure
     chown system radio /sys/class/sensors/barometer_sensor/eeprom_check
@@ -264,4 +268,5 @@ service bugreport /system/bin/bugmailer.sh -v
 	disabled
 	oneshot
 	keycodes 114 115 116
+
 
