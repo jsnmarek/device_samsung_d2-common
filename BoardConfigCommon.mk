@@ -60,6 +60,7 @@ ARCH_ARM_HIGH_OPTIMIZATION := true
 # bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/d2-common/bluetooth
 BOARD_BLUEDROID_VENDOR_CONF := device/samsung/d2-common/bluetooth/vnd_d2.txt
+BOARD_BLUETOOTH_USES_HCIATTACH_PROPERTY := false
 BOARD_BROKEN_RESAMPLER := true
 
 # Disable initlogo, Samsungs framebuffer is weird
