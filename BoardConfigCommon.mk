@@ -39,6 +39,8 @@ BOARD_KERNEL_PAGESIZE       := 2048
 
 # Enable linaro toolchain
 TARGET_KERNEL_CUSTOM_TOOLCHAIN := linaro/bin/arm-linux-gnueabihf-
+TARGET_KERNEL_VARIANT_CONFIG := cyanogen_d2_defconfig
+TARGET_KERNEL_SELINUX_CONFIG := m2selinux_defconfig
 
 TARGET_BOOTLOADER_BOARD_NAME := MSM8960
 
