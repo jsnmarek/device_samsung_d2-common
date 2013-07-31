@@ -82,3 +82,7 @@ BOARD_HAVE_AUDIENCE_A2220 := true
 # Use USB Dock Audio
 BOARD_HAVE_DOCK_USBAUDIO := true
 
+ifneq ($(VARIENT_MODEL),apexqtmo)
+# Use MM heap for Camera
+BOARD_CAMERA_USE_MM_HEAP := true
+endif
