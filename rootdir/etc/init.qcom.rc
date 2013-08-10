@@ -99,6 +99,12 @@ on boot
     mkdir /dev/socket/qmux_gps 0770 gps gps
     chmod 2770 /dev/socket/qmux_gps
 
+    # Allow QMUX daemon to assign port open wait time
+    chown radio radio /sys/devices/virtual/hsicctl/hsicctl0/modem_wait
+
+    # 4.3 requires this
+    chmod 0644 /proc/cmdline
+
     setprop wifi.interface wlan0
 
     #Set SUID bit for usbhub
@@ -140,12 +146,6 @@ on boot
 
     #For bridgemgr daemon to inform the USB driver of the correct transport
     chown radio radio /sys/class/android_usb/f_rmnet_smd_sdio/transport
-
-    # Fix permissions on camera flash control
-    chmod 0660 /sys/devices/virtual/camera/rear/rear_flash
-    chown root camera /sys/devices/virtual/camera/rear/rear_flash
-
-
 
     #To allow interfaces to get v6 address when tethering is enabled
     write /proc/sys/net/ipv6/conf/rmnet0/accept_ra 2
@@ -342,11 +342,11 @@ service netmgrd /system/bin/netmgrd
     class main
     disabled
 
-service sensors /system/bin/sensors.qcom
-    class late_start
-    user root
-    group root
-    disabled
+#service sensors /system/bin/sensors.qcom
+#    class late_start
+#    user root
+#    group root
+#    disabled
 
 on property:ro.use_data_netmgrd=false
 #netmgr not supported on specific target
@@ -553,7 +553,7 @@ on property:ro.data.large_tcp_window_size=true
     # Adjust socket buffer to enlarge TCP receive window for high bandwidth (e.g. DO-RevB)
     write /proc/sys/net/ipv4/tcp_adv_win_scale  1
 on property:bluetooth.hciattach=true
-    start hciattach
+    setprop bluetooth.status on
 
 on property:bluetooth.hciattach=false
     setprop bluetooth.status off
@@ -612,9 +612,12 @@ service macloader /system/bin/macloader
     class main
     oneshot
 
-<<<<<<< HEAD
+service ssr_diag /system/bin/ssr_diag
+    class late_start
+    user system
+    group system
 
-=======
+# Limit to SoC reset (1) and independent SSR (3)
 on property:persist.sys.ssr.restart_level=1
     write /sys/module/subsystem_restart/parameters/restart_level 1
 on property:persist.sys.ssr.restart_level=3

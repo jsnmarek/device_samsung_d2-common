@@ -20,11 +20,6 @@
 # definition file).
 #
 
-# WARNING: This line must come *before* including the proprietary
-# variant, so that it gets overwritten by the parent (which goes
-# against the traditional rules of inheritance).
-USE_CAMERA_STUB := true
-
 # inherit from common msm8960
 -include device/samsung/msm8960-common/BoardConfigCommon.mk
 
@@ -36,9 +31,6 @@ BOARD_KERNEL_CMDLINE        := androidboot.hardware=qcom user_debug=31 zcache
 BOARD_KERNEL_BASE           := 0x80200000
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01300000
 BOARD_KERNEL_PAGESIZE       := 2048
-
-# Enable linaro toolchain
-TARGET_KERNEL_CUSTOM_TOOLCHAIN := linaro/bin/arm-linux-gnueabihf-
 TARGET_KERNEL_VARIANT_CONFIG := cyanogen_d2_defconfig
 ifeq ($(HAVE_SELINUX),true)
 TARGET_KERNEL_SELINUX_CONFIG := m2selinux_defconfig

@@ -96,10 +96,6 @@ on post-fs-data
     # permission for TZIC
     chown system system /dev/tzic
 
-# permissions for scheduler
-    chown root system /sys/block/mmcblk0/queue/scheduler
-    chmod 0664 /sys/block/mmcblk0/queue/scheduler
-
     # sensor
     chown system radio /sys/class/sensors/barometer_sensor/sea_level_pressure
     chown system radio /sys/class/sensors/barometer_sensor/eeprom_check
@@ -162,7 +158,7 @@ on post-fs-data
     # Permissions for Camera
     chown system radio /sys/class/camera/rear/rear_camfw
     chown system radio /sys/class/camera/rear/rear_camtype
-    chown system radio /sys/class/camera/rear/rear_flash
+    chown system camera /sys/class/camera/rear/rear_flash
     chown system radio /sys/class/camera/front/front_camfw
     chown system radio /sys/class/camera/front/front_camtype
     chown system camera /sys/class/flash/flash/flash_power
